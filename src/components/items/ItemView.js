@@ -61,7 +61,13 @@ const ItemView = () => {
                 </Card>
             )}
 
-            <h5>Ingredients</h5>
+            <div className="d-flex justify-content-between align-items-center mb-2">
+                <h4>Ingredients</h4>
+                <Button variant="primary" onClick={() => navigate(`/items/${id}/ingredients/new`)}>
+                    Add Ingredient
+                </Button>
+            </div>
+
             {ingredients.length === 0 ? (
                 <p>No ingredients found.</p>
             ) : (
