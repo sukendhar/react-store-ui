@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Container, Card, Table, Button, Alert, Spinner } from 'react-bootstrap';
+import {Container, Card, Button, Alert, Spinner, Row, Col} from 'react-bootstrap';
 import api from '../../services/api';
 
 const StoreView = () => {
@@ -26,6 +26,18 @@ const StoreView = () => {
             setError('Error in loading store or items');
         } finally {
             setLoading(false);
+        }
+    };
+
+    const DeleteItem = async (itemId) => {
+        const confirm = window.confirm('Are you sure you want to delete this item?');
+        if (!confirm) return;
+
+        try {
+            await api.delete(`/items/${itemId}`);
+            setItems(items.filter((item) => item.id !== itemId));
+        } catch (err) {
+            alert('Error in delete item');
         }
     };
 
@@ -55,24 +67,32 @@ const StoreView = () => {
             {items.length === 0 ? (
                 <p>No items available for this store.</p>
             ) : (
-                <Table striped bordered hover>
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Description</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+                <Row xs={1} md={4} className="g-4">
                     {items.map((item) => (
-                        <tr key={item.id}>
-                            <td>{item.name}</td>
-                            <td>${item.price}</td>
-                            <td>{item.description}</td>
-                        </tr>
+                        <Col key={item.id}>
+                            <Card style={{ height: '300px' }}>
+                                <Card.Body className="d-flex flex-column">
+                                    <Card.Title>{item.name}</Card.Title>
+                                    <Card.Text className="text-truncate-multiline mb-2">
+                                        {item.description}
+                                    </Card.Text>
+
+                                    <div className="mt-auto">
+                                        <Card.Title className="mb-3">${item.price}</Card.Title>
+                                        <Button
+                                            variant="danger"
+                                            size="sm"
+                                            onClick={() => DeleteItem(item.id)}
+                                        >
+                                            Delete
+                                        </Button>
+                                    </div>
+                                </Card.Body>
+                            </Card>
+
+                        </Col>
                     ))}
-                    </tbody>
-                </Table>
+                </Row>
             )}
             <Button onClick={() => navigate('/')}>Back</Button>
         </Container>
