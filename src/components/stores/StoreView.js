@@ -45,7 +45,13 @@ const StoreView = () => {
                 </Card>
             )}
 
-            <h4>Items</h4>
+            <div className="d-flex justify-content-between align-items-center mb-2">
+                <h4>Items</h4>
+                <Button variant="primary" onClick={() => navigate(`/stores/${id}/items/new`)}>
+                    Add Item
+                </Button>
+            </div>
+
             {items.length === 0 ? (
                 <p>No items available for this store.</p>
             ) : (

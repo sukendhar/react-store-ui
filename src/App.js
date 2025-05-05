@@ -4,6 +4,7 @@ import StoreList from './components/stores/StoreList';
 import StoreForm from './components/stores/StoreForm';
 import StoreView from "./components/stores/StoreView";
 import EditStoreForm from "./components/stores/EditStoreForm";
+import ItemForm from "./components/items/ItemForm";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
             <Route path="/stores/new" element={<StoreForm />} />
             <Route path="/stores/:id" element={<StoreView />} />
             <Route path="/stores/:id/edit" element={<EditStoreForm />} />
+            <Route path="/stores/:storeId/items/new" element={<ItemForm />} />
         </Routes>
       </Router>
   );
