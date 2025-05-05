@@ -53,6 +53,14 @@ const StoreList = () => {
                             <td><h3>{store.name}</h3><br/><i>{store.address}</i></td>
                             <td>
                                 <Button
+                                    variant="info"
+                                    size="sm"
+                                    className="me-2"
+                                    onClick={() => navigate(`/stores/${store.id}`)}
+                                >
+                                    View
+                                </Button>
+                                <Button
                                     variant="danger"
                                     size="sm"
                                     onClick={() => storeDelete(store.id)}
