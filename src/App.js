@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import StoreList from './components/stores/StoreList';
 import StoreForm from './components/stores/StoreForm';
 import StoreView from "./components/stores/StoreView";
+import EditStoreForm from "./components/stores/EditStoreForm";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
             <Route path="/" element={<StoreList />} />
             <Route path="/stores/new" element={<StoreForm />} />
             <Route path="/stores/:id" element={<StoreView />} />
+            <Route path="/stores/:id/edit" element={<EditStoreForm />} />
         </Routes>
       </Router>
   );

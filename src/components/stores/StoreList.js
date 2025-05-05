@@ -61,6 +61,14 @@ const StoreList = () => {
                                     View
                                 </Button>
                                 <Button
+                                    variant="warning"
+                                    size="sm"
+                                    className="me-2"
+                                    onClick={() => navigate(`/stores/${store.id}/edit`)}
+                                >
+                                    Edit
+                                </Button>
+                                <Button
                                     variant="danger"
                                     size="sm"
                                     onClick={() => storeDelete(store.id)}
