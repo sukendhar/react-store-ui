@@ -30,6 +30,18 @@ const ItemView = () => {
         }
     };
 
+    const DeleteIngredient = async (ingredientId) => {
+        const confirm = window.confirm('Are you sure you want to delete this ingredient?');
+        if (!confirm) return;
+
+        try {
+            await api.delete(`/ingredients/${ingredientId}`);
+            setIngredients(ingredients.filter((ingredient) => ingredient.id !== ingredientId));
+        } catch (err) {
+            alert('Error in delete ingredient');
+        }
+    };
+
     if (loading) return <Spinner animation="border" className="m-5" />;
 
     return (
@@ -65,6 +77,23 @@ const ItemView = () => {
                         <tr key={ingredient.id}>
                             <td>{ingredient.name}</td>
                             <td>{ingredient.quantity}</td>
+                            <td>
+                                <Button
+                                    size="sm"
+                                    variant="warning"
+                                    className="me-2"
+                                    onClick={() => navigate(`/ingredients/${ingredient.id}/edit`)}
+                                >
+                                    Edit
+                                </Button>
+                                <Button
+                                    size="sm"
+                                    variant="danger"
+                                    onClick={() => DeleteIngredient(ingredient.id)}
+                                >
+                                    Delete
+                                </Button>
+                            </td>
                         </tr>
                     ))}
                     </tbody>

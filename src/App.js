@@ -7,6 +7,7 @@ import EditStoreForm from "./components/stores/EditStoreForm";
 import ItemForm from "./components/items/ItemForm";
 import EditItemForm from "./components/items/EditItemsForm";
 import ItemView from "./components/items/ItemView";
+import EditIngredientForm from "./components/ingredients/EditIngredientForm";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/stores/:storeId/items/new" element={<ItemForm />} />
             <Route path="/items/:id/edit" element={<EditItemForm />} />
             <Route path="/items/:id" element={<ItemView />} />
+            <Route path="/ingredients/:id/edit" element={<EditIngredientForm />} />
         </Routes>
       </Router>
   );
