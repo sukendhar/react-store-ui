@@ -45,6 +45,9 @@ const StoreView = () => {
 
     return (
         <Container className="mt-4">
+            <Button variant="secondary" className="mb-3" onClick={() => navigate('/')}>
+                Back
+            </Button>
             {error && <Alert variant="danger">{error}</Alert>}
 
             {store && (
@@ -80,6 +83,14 @@ const StoreView = () => {
                                     <div className="mt-auto">
                                         <Card.Title className="mb-3">${item.price}</Card.Title>
                                         <Button
+                                            variant="info"
+                                            size="sm"
+                                            className="me-2"
+                                            onClick={() => navigate(`/items/${item.id}`)}
+                                        >
+                                            View
+                                        </Button>
+                                        <Button
                                             variant="warning"
                                             size="sm"
                                             className="me-2"
@@ -101,7 +112,6 @@ const StoreView = () => {
                     ))}
                 </Row>
             )}
-            <Button onClick={() => navigate('/')}>Back</Button>
         </Container>
     );
 };
