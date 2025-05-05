@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Button, Container, Alert, Spinner } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import api from '../../services/api';
 
 const StoreList = () => {
     const [stores, setStores] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         listStores();
@@ -23,7 +25,7 @@ const StoreList = () => {
     };
 
     const storeDelete = async (id) => {
-        if (!window.confirm('Are you sure to delete?')) return;
+        if (!window.confirm('Are you sure?')) return;
         try {
             await api.delete(`/stores/${id}`);
             setStores((prev) => prev.filter((store) => store.id !== id));
@@ -38,6 +40,9 @@ const StoreList = () => {
         <Container className="mt-4">
             <h2>Stores List</h2>
             {error && <Alert variant="danger">{error}</Alert>}
+            <Button variant="primary" className="mb-3" onClick={() => navigate('/stores/new')}>
+                Add Store
+            </Button>
             {stores.length === 0 ? (
                 <p>No stores found.</p>
             ) : (
