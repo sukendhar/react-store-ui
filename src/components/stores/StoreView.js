@@ -80,6 +80,14 @@ const StoreView = () => {
                                     <div className="mt-auto">
                                         <Card.Title className="mb-3">${item.price}</Card.Title>
                                         <Button
+                                            variant="warning"
+                                            size="sm"
+                                            className="me-2"
+                                            onClick={() => navigate(`/items/${item.id}/edit`)}
+                                        >
+                                            Edit
+                                        </Button>
+                                        <Button
                                             variant="danger"
                                             size="sm"
                                             onClick={() => DeleteItem(item.id)}
@@ -89,7 +97,6 @@ const StoreView = () => {
                                     </div>
                                 </Card.Body>
                             </Card>
-
                         </Col>
                     ))}
                 </Row>
