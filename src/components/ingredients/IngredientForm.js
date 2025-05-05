@@ -40,7 +40,7 @@ const IngredientForm = () => {
             setIngredient({ name: '', quantity: '' });
             setTimeout(() => navigate(`/items/${itemId}`), 1500);
         } catch (err) {
-            setErrors({ submit: 'Errir in add ingredient' });
+            setErrors({ submit: 'Error in add ingredient' });
         }
     };
 
