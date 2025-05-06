@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Button, Container, Alert, Spinner } from 'react-bootstrap';
+import {Table, Button, Container, Alert, Spinner, Col, Card, Row} from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import api from '../../services/api';
 
@@ -24,7 +24,7 @@ const StoreList = () => {
         }
     };
 
-    const storeDelete = async (id) => {
+    const DeleteStore = async (id) => {
         if (!window.confirm('Are you sure?')) return;
         try {
             await api.delete(`/stores/${id}`);
@@ -46,40 +46,46 @@ const StoreList = () => {
             {stores.length === 0 ? (
                 <p>No stores found.</p>
             ) : (
-                <Table striped bordered hover>
-                    <tbody>
+                <Row xs={1} md={4} className="g-4">
                     {stores.map((store) => (
-                        <tr key={store.id}>
-                            <td><h3>{store.name}</h3><br/><i>{store.address}</i></td>
-                            <td>
-                                <Button
-                                    variant="info"
-                                    size="sm"
-                                    className="me-2"
-                                    onClick={() => navigate(`/stores/${store.id}`)}
-                                >
-                                    View
-                                </Button>
-                                <Button
-                                    variant="warning"
-                                    size="sm"
-                                    className="me-2"
-                                    onClick={() => navigate(`/stores/${store.id}/edit`)}
-                                >
-                                    Edit
-                                </Button>
-                                <Button
-                                    variant="danger"
-                                    size="sm"
-                                    onClick={() => storeDelete(store.id)}
-                                >
-                                    Delete
-                                </Button>
-                            </td>
-                        </tr>
+                        <Col key={store.id}>
+                            <Card style={{ height: '200px' }}>
+                                <Card.Body className="d-flex flex-column">
+                                    <Card.Title>{store.name}</Card.Title>
+                                    <Card.Text className="mb-2">
+                                        {store.address}
+                                    </Card.Text>
+
+                                    <div className="mt-auto">
+                                        <Button
+                                            variant="success"
+                                            size="sm"
+                                            className="me-2"
+                                            onClick={() => navigate(`/stores/${store.id}`)}
+                                        >
+                                            View
+                                        </Button>
+                                        <Button
+                                            variant="success"
+                                            size="sm"
+                                            className="me-2"
+                                            onClick={() => navigate(`/stores/${store.id}/edit`)}
+                                        >
+                                            Edit
+                                        </Button>
+                                        <Button
+                                            variant="danger"
+                                            size="sm"
+                                            onClick={() => DeleteStore(store.id)}
+                                        >
+                                            Delete
+                                        </Button>
+                                    </div>
+                                </Card.Body>
+                            </Card>
+                        </Col>
                     ))}
-                    </tbody>
-                </Table>
+                </Row>
             )}
         </Container>
     );

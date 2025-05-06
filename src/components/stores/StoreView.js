@@ -83,7 +83,7 @@ const StoreView = () => {
                                     <div className="mt-auto">
                                         <Card.Title className="mb-3">${item.price}</Card.Title>
                                         <Button
-                                            variant="info"
+                                            variant="success"
                                             size="sm"
                                             className="me-2"
                                             onClick={() => navigate(`/items/${item.id}`)}
@@ -91,7 +91,7 @@ const StoreView = () => {
                                             View
                                         </Button>
                                         <Button
-                                            variant="warning"
+                                            variant="success"
                                             size="sm"
                                             className="me-2"
                                             onClick={() => navigate(`/items/${item.id}/edit`)}

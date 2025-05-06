@@ -61,7 +61,7 @@ const IngredientView = () => {
             <div className="mt-2">
                 <Button
                     size="sm"
-                    variant="warning"
+                    variant="success"
                     className="me-2"
                     onClick={() => navigate(`/ingredients/${ingredient.id}/edit`)}
                 >
