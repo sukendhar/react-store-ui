@@ -13,22 +13,21 @@ const ItemView = () => {
     const [error, setError] = useState('');
 
     useEffect(() => {
+        const getItemDetails = async () => {
+            try {
+                const itemRes = await api.get(`/items/${id}`);
+                const ingredientRes = await api.get(`/items/${id}/ingredients`);
+
+                setItem(itemRes.data);
+                setIngredients(ingredientRes.data);
+            } catch (err) {
+                setError('Error in load item or ingredients');
+            } finally {
+                setLoading(false);
+            }
+        };
         getItemDetails();
-    }, []);
-
-    const getItemDetails = async () => {
-        try {
-            const itemRes = await api.get(`/items/${id}`);
-            const ingredientRes = await api.get(`/items/${id}/ingredients`);
-
-            setItem(itemRes.data);
-            setIngredients(ingredientRes.data);
-        } catch (err) {
-            setError('Error in load item or ingredients');
-        } finally {
-            setLoading(false);
-        }
-    };
+    }, [id]);
 
     const DeleteIngredient = async (ingredientId) => {
         const confirm = window.confirm('Are you sure you want to delete this ingredient?');

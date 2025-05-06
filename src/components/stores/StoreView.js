@@ -13,21 +13,21 @@ const StoreView = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        getStoreAndItems();
-    }, []);
+        const getStoreAndItems = async () => {
+            try {
+                const storeRes = await api.get(`/stores/${id}`);
+                const itemsRes = await api.get(`/stores/${id}/items`);
+                setStore(storeRes.data);
+                setItems(itemsRes.data);
+            } catch (err) {
+                setError('Error in loading store or items');
+            } finally {
+                setLoading(false);
+            }
+        };
 
-    const getStoreAndItems = async () => {
-        try {
-            const storeRes = await api.get(`/stores/${id}`);
-            const itemsRes = await api.get(`/stores/${id}/items`);
-            setStore(storeRes.data);
-            setItems(itemsRes.data);
-        } catch (err) {
-            setError('Error in loading store or items');
-        } finally {
-            setLoading(false);
-        }
-    };
+        getStoreAndItems();
+    }, [id]);
 
     const DeleteItem = async (itemId) => {
         const confirm = window.confirm('Are you sure you want to delete this item?');

@@ -13,22 +13,22 @@ const EditIngredientForm = () => {
     const [success, setSuccess] = useState('');
 
     useEffect(() => {
-        getIngredient();
-    }, []);
+        const getIngredient = async () => {
+            try {
+                const res = await api.get(`/ingredients/${id}`);
+                setIngredient({
+                    name: res.data.name,
+                    quantity: res.data.quantity
+                });
+            } catch (err) {
+                setErrors({ fetch: 'Error in load ingredient details' });
+            } finally {
+                setLoading(false);
+            }
+        };
 
-    const getIngredient = async () => {
-        try {
-            const res = await api.get(`/ingredients/${id}`);
-            setIngredient({
-                name: res.data.name,
-                quantity: res.data.quantity
-            });
-        } catch (err) {
-            setErrors({ fetch: 'Error in load ingredient details' });
-        } finally {
-            setLoading(false);
-        }
-    };
+        getIngredient();
+    }, [id]);
 
     const validate = () => {
         const newErrors = {};

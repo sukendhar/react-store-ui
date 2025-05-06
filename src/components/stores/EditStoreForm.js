@@ -13,19 +13,19 @@ const EditStoreForm = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        getStore();
-    }, []);
+        const getStore = async () => {
+            try {
+                const response = await api.get(`/stores/${id}`);
+                setStore(response.data);
+            } catch (err) {
+                setErrors({ fetch: 'Error in loading store details' });
+            } finally {
+                setLoading(false);
+            }
+        };
 
-    const getStore = async () => {
-        try {
-            const response = await api.get(`/stores/${id}`);
-            setStore(response.data);
-        } catch (err) {
-            setErrors({ fetch: 'Error in loading store details' });
-        } finally {
-            setLoading(false);
-        }
-    };
+        getStore();
+    }, [id]);
 
     const validate = () => {
         const newErrors = {};

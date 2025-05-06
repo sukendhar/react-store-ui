@@ -13,23 +13,23 @@ const EditItemForm = () => {
     const [success, setSuccess] = useState('');
 
     useEffect(() => {
-        fetchItem();
-    }, []);
+        const fetchItem = async () => {
+            try {
+                const response = await api.get(`/items/${id}`);
+                setItem({
+                    name: response.data.name,
+                    price: response.data.price,
+                    description: response.data.description
+                });
+            } catch (err) {
+                setErrors({ fetch: 'Error in load item details' });
+            } finally {
+                setLoading(false);
+            }
+        };
 
-    const fetchItem = async () => {
-        try {
-            const response = await api.get(`/items/${id}`);
-            setItem({
-                name: response.data.name,
-                price: response.data.price,
-                description: response.data.description
-            });
-        } catch (err) {
-            setErrors({ fetch: 'Error in load item details' });
-        } finally {
-            setLoading(false);
-        }
-    };
+        fetchItem();
+    }, [id]);
 
     const validate = () => {
         const newErrors = {};

@@ -12,19 +12,19 @@ const IngredientView = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        getIngredient();
-    }, []);
+        const getIngredient = async () => {
+            try {
+                const res = await api.get(`/ingredients/${id}`);
+                setIngredient(res.data);
+            } catch (err) {
+                setError('Error in loading ingredient');
+            } finally {
+                setLoading(false);
+            }
+        };
 
-    const getIngredient = async () => {
-        try {
-            const res = await api.get(`/ingredients/${id}`);
-            setIngredient(res.data);
-        } catch (err) {
-            setError('Error in loading ingredient');
-        } finally {
-            setLoading(false);
-        }
-    };
+        getIngredient();
+    }, [id]);
 
     const DeleteIngredient = async () => {
         const confirm = window.confirm('Are you sure you want to delete this ingredient?');
