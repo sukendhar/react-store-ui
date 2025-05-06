@@ -86,6 +86,14 @@ const ItemView = () => {
                             <td>
                                 <Button
                                     size="sm"
+                                    variant="info"
+                                    className="me-2"
+                                    onClick={() => navigate(`/ingredients/${ingredient.id}`)}
+                                >
+                                    View
+                                </Button>
+                                <Button
+                                    size="sm"
                                     variant="warning"
                                     className="me-2"
                                     onClick={() => navigate(`/ingredients/${ingredient.id}/edit`)}
