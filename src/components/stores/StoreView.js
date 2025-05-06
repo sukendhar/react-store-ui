@@ -9,6 +9,7 @@ const StoreView = () => {
 
     const [store, setStore] = useState(null);
     const [items, setItems] = useState([]);
+    const [itemCount, setItemCount] = useState(null);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(true);
 
@@ -17,8 +18,11 @@ const StoreView = () => {
             try {
                 const storeRes = await api.get(`/stores/${id}`);
                 const itemsRes = await api.get(`/stores/${id}/items`);
+                const countRes = await api.get(`/stores/${id}/items_count`);
+
                 setStore(storeRes.data);
                 setItems(itemsRes.data);
+                setItemCount(countRes.data.items_count);
             } catch (err) {
                 setError('Error in loading store or items');
             } finally {
@@ -56,6 +60,7 @@ const StoreView = () => {
                         <Card.Title>{store.name}</Card.Title>
                         <Card.Subtitle className="mb-2 text-muted">{store.address}</Card.Subtitle>
                         <Card.Text>{store.description}</Card.Text>
+                        <Card.Text>Total no of items: {itemCount}</Card.Text>
                     </Card.Body>
                 </Card>
             )}
