@@ -47,3 +47,13 @@ Access React UI app at: [http://localhost:3001](http://localhost:3001)
 - **Login / Signup** – JWT token stored in localStorage
 
 ---
+
+### Screenshots
+
+![Store List](public/stores_list.png)
+![Create New Store](public/create_new_store.png)
+![Item List](public/items_list.png)
+![Ingredient List](public/ingredients_list.png)
+![Ingredient Details](public/ingredient_details.png)
+![Signup](public/signup.png)
+![Login](public/login.png)
