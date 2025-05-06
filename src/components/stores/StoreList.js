@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {Table, Button, Container, Alert, Spinner, Col, Card, Row} from 'react-bootstrap';
+import {Button, Container, Alert, Spinner, Col, Card, Row} from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import api from '../../services/api';
 
